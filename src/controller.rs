@@ -1,6 +1,7 @@
 use std::io;
 
 use chatgpt::prelude::*;
+use loading::Loading;
 
 pub async fn single_prompt(prompt: String, api_key: String) -> Result<()> {
     print_single_start(prompt.clone());
@@ -8,9 +9,15 @@ pub async fn single_prompt(prompt: String, api_key: String) -> Result<()> {
     let client = ChatGPT::new(api_key)?;
     let mut conversation = client.new_conversation();
 
+    let loading = Loading::default();
+    loading.text("Waiting for the AI to do AI things");
+
     let response = conversation
         .send_message(prompt.clone())
         .await?;
+
+    loading.success("Answer:");
+    loading.end();
 
     print_answer(response.message().content.clone());
 
@@ -36,9 +43,15 @@ pub async fn conversation_prompt(api_key: String) -> Result<()> {
                 finished = true;
             }
             _ => {
+                let loading = Loading::default();
+                loading.text("Waiting for the AI to do AI things");
+
                 let response = conversation
                     .send_message(question)
                     .await?;
+
+                loading.success("Answer:");
+                loading.end();
                 print_answer(response.message().content.clone());
             }
         }
@@ -68,7 +81,5 @@ fn print_conversation_exit() {
 }
 
 fn print_answer(answer: String) {
-    println!();
-    println!("📢 Answer:");
     println!("{}", answer);
 }

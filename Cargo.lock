@@ -387,6 +387,7 @@ dependencies = [
  "chatgpt_rs",
  "clap",
  "confy",
+ "loading",
  "serde",
  "tokio",
 ]
@@ -612,6 +613,12 @@ name = "linux-raw-sys"
 version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "36eb31c1778188ae1e64398743890d0877fef36d11521ac60406b42016e8c2cf"
+
+[[package]]
+name = "loading"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "676420b03272176423578148eee61319e893422694f6d96a394841cb0901357f"
 
 [[package]]
 name = "lock_api"
