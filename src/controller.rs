@@ -31,15 +31,18 @@ pub async fn conversation_prompt(api_key: String) -> Result<()> {
         let read_result = io::stdin().read_line(&mut question_buffer);
         if read_result.is_ok() { // TODO Error handling
             let question = question_buffer.trim_end_matches("\n").to_string();
-            if question == "exit" {
-                print_conversation_exit();
-                finished = true;
-            } else {
-                let response = conversation
-                    .send_message(question)
-                    .await?;
-                print_answer(response.message().content.clone());
-            }
+            match question.as_str() {
+                "quit" | "q" => {
+                    print_conversation_exit();
+                    finished = true;
+                }
+                _ => {
+                    let response = conversation
+                        .send_message(question)
+                        .await?;
+                    print_answer(response.message().content.clone());
+                }
+            }   
         }
     }
 
@@ -59,7 +62,7 @@ fn print_conversation_start() {
 
 fn print_conversation_question() {
     println!();
-    println!("Enter your question below. (type \"exit\" to quit)");
+    println!("Enter your question below. (type \"quit\" or \"q\" to quit)");
 }
 
 fn print_conversation_exit() {

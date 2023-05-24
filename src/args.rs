@@ -5,6 +5,7 @@ use clap::{Parser};
 pub struct AppArgs {
 
     /// The chat-gpt prompt
+    #[arg(default_value_t = String::from(""))]
     pub prompt: String,
 
     /// Enable to start a conversation instead of a single prompt
