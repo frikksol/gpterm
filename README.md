@@ -20,6 +20,10 @@ Conversation mode works like the standard web ui for chat-GPT, where you start a
 gpterm -c
 ```
 
+## Prerequisite
+
+- A chat-GPT user and API key. After creating a user, go to https://platform.openai.com/account/api-keys to create one
+
 ## Installation
 
 Currently the only way to install it is by building from source
