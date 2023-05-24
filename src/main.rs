@@ -10,7 +10,7 @@ use args::AppArgs;
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let args = AppArgs::parse();
-    let config_result = configuration::get().unwrap(); //TODO avoid unwrap
+    let config_result = configuration::get().unwrap();
 
     if args.conversation {
         controller::conversation_prompt(config_result.api_key).await? 

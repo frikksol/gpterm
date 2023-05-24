@@ -28,20 +28,18 @@ pub async fn conversation_prompt(api_key: String) -> Result<()> {
         print_conversation_question();
 
         let mut question_buffer = String::new();
-        let read_result = io::stdin().read_line(&mut question_buffer);
-        if read_result.is_ok() { // TODO Error handling
-            let question = question_buffer.trim_end_matches("\n").to_string();
-            match question.as_str() {
-                "quit" | "q" => {
-                    print_conversation_exit();
-                    finished = true;
-                }
-                _ => {
-                    let response = conversation
-                        .send_message(question)
-                        .await?;
-                    print_answer(response.message().content.clone());
-                }
+        io::stdin().read_line(&mut question_buffer)?;
+        let question = question_buffer.trim_end_matches("\n").to_string();
+        match question.as_str() {
+            "quit" | "q" => {
+                print_conversation_exit();
+                finished = true;
+            }
+            _ => {
+                let response = conversation
+                    .send_message(question)
+                    .await?;
+                print_answer(response.message().content.clone());
             }
         }
     }
