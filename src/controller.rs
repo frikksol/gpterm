@@ -1,11 +1,8 @@
 use chatgpt::prelude::*;
 
-pub async fn prompt(prompt: String) -> Result<()> {
+pub async fn prompt(prompt: String, api_key: String) -> Result<()> {
     // Initial user feedback
     print_initial_info(prompt.clone());
-
-    // API key
-    let api_key = "";
 
     // Creating a client
     let client = ChatGPT::new(api_key)?;
