@@ -42,36 +42,35 @@ pub async fn conversation_prompt(api_key: String) -> Result<()> {
                         .await?;
                     print_answer(response.message().content.clone());
                 }
-            }   
+            }
         }
     }
-
     Ok(())
 }
 
 fn print_single_start(prompt: String) {
     println!();
-    println!("Question:");
+    println!("🧐 Question:");
     println!("{}", prompt);
 }
 
 fn print_conversation_start() {
     println!();
-    println!("Starting a conversation with chat-GPT")
+    println!("✨ Starting a conversation with chat-GPT")
 }
 
 fn print_conversation_question() {
     println!();
-    println!("Enter your question below. (type \"quit\" or \"q\" to quit)");
+    println!("🧐 Enter your question below. (type \"quit\" or \"q\" to quit)");
 }
 
 fn print_conversation_exit() {
     println!();
-    println!("Ok, bye!");
+    println!("👋 Ok, bye!");
 }
 
 fn print_answer(answer: String) {
     println!();
-    println!("Answer:");
+    println!("📢 Answer:");
     println!("{}", answer);
 }
