@@ -28,8 +28,8 @@ Currently the only way to install it is by building from source
 
 ```bash
 cd <wherever>
-git clone <repo-name>
-cd <repo-name>
+git clone git@github.com:frikksol/gpterm.git
+cd gpterm
 
 # Single prompt mode
 cargo run -- "What is 25 Celsius in Kelvin"
