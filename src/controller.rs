@@ -1,13 +1,11 @@
+use std::io;
+
 use chatgpt::prelude::*;
 
-pub async fn prompt(prompt: String, api_key: String) -> Result<()> {
-    // Initial user feedback
-    print_initial_info(prompt.clone());
+pub async fn single_prompt(prompt: String, api_key: String) -> Result<()> {
+    print_single_start(prompt.clone());
 
-    // Creating a client
     let client = ChatGPT::new(api_key)?;
-
-    // Creating a new conversation
     let mut conversation = client.new_conversation();
 
     let response = conversation
@@ -16,28 +14,57 @@ pub async fn prompt(prompt: String, api_key: String) -> Result<()> {
 
     print_answer(response.message().content.clone());
 
-/*     // Sending messages to the conversation
-    conversation
-        .send_message("Could you describe the Rust programming language in 5 words?")
-        .await?;
-    let response = conversation
-        .send_message("Now could you do the same, but for Kotlin?")
-        .await?;
-    println!("Response for Kotlin: {}", response.message().content);
+    Ok(())
+}
 
-    // The history is preserved and is sent to the API each call
-    for message in &conversation.history {
-        println!("Message in the history: {message:#?}")
-    } */
+pub async fn conversation_prompt(api_key: String) -> Result<()> {
+    print_conversation_start();
+
+    let mut finished = false;
+    let client = ChatGPT::new(api_key)?;
+    let mut conversation = client.new_conversation();
+
+    while !finished {
+        print_conversation_question();
+
+        let mut question_buffer = String::new();
+        let read_result = io::stdin().read_line(&mut question_buffer);
+        if read_result.is_ok() { // TODO Error handling
+            let question = question_buffer.trim_end_matches("\n").to_string();
+            if question == "exit" {
+                print_conversation_exit();
+                finished = true;
+            } else {
+                let response = conversation
+                    .send_message(question)
+                    .await?;
+                print_answer(response.message().content.clone());
+            }
+        }
+    }
 
     Ok(())
 }
 
-fn print_initial_info(prompt: String) {
-    println!("Assemble the robots!");
+fn print_single_start(prompt: String) {
     println!();
     println!("Question:");
     println!("{}", prompt);
+}
+
+fn print_conversation_start() {
+    println!();
+    println!("Starting a conversation with chat-GPT")
+}
+
+fn print_conversation_question() {
+    println!();
+    println!("Enter your question below. (type \"exit\" to quit)");
+}
+
+fn print_conversation_exit() {
+    println!();
+    println!("Ok, bye!");
 }
 
 fn print_answer(answer: String) {

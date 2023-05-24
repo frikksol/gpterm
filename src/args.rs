@@ -6,4 +6,8 @@ pub struct RootArgs {
 
     /// The chat-gpt prompt
     pub prompt: String,
+
+    /// Enable to start a conversation instead of a single prompt
+    #[arg(short, long, default_value_t = false)]
+    pub conversation: bool
 }
