@@ -2,6 +2,14 @@
 name = "gpterm"
 version = "0.1.0"
 edition = "2021"
+authors = ["Frikk Herding <frikksol@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A tool to use chat-GPT from the comfort of your terminal"
+readme = "README.md"
+homepage = "https://github.com/frikksol/gpterm"
+repository = "https://github.com/frikksol/gpterm"
+keywords = ["cli", "chat-gpt", "ai"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 clap = { version = "4.2.4", features = ["derive"] }
