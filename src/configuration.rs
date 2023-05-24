@@ -16,7 +16,7 @@ pub fn get() -> Result<GptermConfig, confy::ConfyError> {
     let mut cfg: GptermConfig = confy::load(app_name, None)?;
 
     if cfg.api_key.is_empty() {
-        println!("No API key is set. Please enter your API key and press enter");
+        print_no_api_key_info();
         let mut buffer = String::new();
         let read_result = io::stdin().read_line(&mut buffer);
 
@@ -28,4 +28,10 @@ pub fn get() -> Result<GptermConfig, confy::ConfyError> {
         }
     }
     Ok(cfg)
+}
+
+fn print_no_api_key_info() {
+    println!();
+    println!("You do not have an API key set. Go to https://platform.openai.com/account/api-keys to make one");
+    println!("Copy the API key, and paste it here, and press enter.");
 }
