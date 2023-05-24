@@ -26,7 +26,19 @@ gpterm -c
 
 ## Installation
 
-Currently the only way to install it is by building from source
+Currently the only way to install it is by installing with Cargo or building from source. I am hoping to soon add it to package managers.
+
+### From Cargo
+
+```bash
+cargo install gpterm
+
+# Single prompt mode
+gpterm "What is a 25 celsius in kelvin?"
+
+# Conversation mode
+gpterm -c
+```
 
 ### Building from source
 
