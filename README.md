@@ -12,6 +12,8 @@ Single prompt mode is perfect for quick questions that needs answering:
 gpterm "What is a 25 celsius in kelvin?"
 ```
 
+![single-prompt-mode](https://github.com/frikksol/gpterm/assets/13680486/57bb62a9-6f70-4732-9aa3-b866948ff789)
+
 ### Conversation mode
 
 Conversation mode works like the standard web ui for chat-GPT, where you start a back and forth conversation with the AI:
@@ -19,6 +21,8 @@ Conversation mode works like the standard web ui for chat-GPT, where you start a
 ```bash
 gpterm -c
 ```
+
+![conversation-mode](https://github.com/frikksol/gpterm/assets/13680486/d080a8eb-3494-437d-be83-0a100e59069b)
 
 ## Prerequisite
 
