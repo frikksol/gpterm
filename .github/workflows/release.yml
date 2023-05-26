@@ -1,19 +1,39 @@
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - 'v*'
 
 name: Release
 
 jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
   build-release:
-    name: Release ${{ matrix.target }}
+    name: Build ${{ matrix.target }}
+    needs: create-release
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          - target: x86_64-pc-windows-gnu
-            archive: zip
+          # Disable windows for now as it breaks
+          #- target: x86_64-pc-windows-gnu
+          #  archive: zip
           - target: x86_64-unknown-linux-musl
             archive: tar.gz tar.xz tar.zst
           - target: x86_64-apple-darwin
@@ -29,7 +49,7 @@ jobs:
           ARCHIVE_TYPES: ${{ matrix.archive }}
 
   homebrew:
-    name: Bump Homebrew formula
+    name: Bump Homebrew Formula
     needs: build-release
     runs-on: ubuntu-latest
     steps:
