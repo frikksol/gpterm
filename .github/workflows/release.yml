@@ -60,7 +60,7 @@ jobs:
           formula-path: Formula/gpterm.rb
           homebrew-tap: frikksol/frikksol
           base-branch: main
-          download-url: https://github.com/frikksol/gpterm/releases/download/${{ github.ref }}/gpterm_${{ github.ref }}_x86_64-apple-darwin.tar.gz
+          download-url: https://github.com/frikksol/gpterm/releases/download/${{ github.ref_name }}/gpterm_${{ github.ref_name }}_x86_64-apple-darwin.tar.gz
           commit-message: |
             {{formulaName}} {{version}}
 
