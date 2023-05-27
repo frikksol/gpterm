@@ -1,7 +1,6 @@
 use serde::{Serialize, Deserialize};
 use std::io;
 
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct GptermConfig {
     pub api_key: String,
