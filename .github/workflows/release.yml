@@ -31,6 +31,7 @@ jobs:
 
   publish-to-cargo:
     name: Publishing to Cargo
+    needs: build-release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -38,6 +39,8 @@ jobs:
       - run: cargo publish --token ${{ secrets.CARGO_API_KEY }} --allow-dirty
 
   bump-homebrew-formula:
+    name: Bump Homebrew Formula
+    needs: build-release
     runs-on: macos-latest
     steps:
       - name: Checkout repository
