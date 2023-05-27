@@ -30,7 +30,7 @@ jobs:
           ARCHIVE_TYPES: ${{ matrix.archive }}
 
   publish-to-cargo:
-    name: Publishing to Cargo
+    name: Publish to Cargo
     needs: build-release
     runs-on: ubuntu-latest
     steps:
