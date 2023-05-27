@@ -51,3 +51,4 @@ jobs:
           tap: frikksol/frikksol
           formula: gpterm
           token: ${{ secrets.PUBLISHER_TOKEN }}
+          no_fork: true
