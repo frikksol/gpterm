@@ -29,22 +29,21 @@ jobs:
           RUSTTARGET: ${{ matrix.target }}
           ARCHIVE_TYPES: ${{ matrix.archive }}
 
-  homebrew:
-    name: Bump Homebrew Formula
-    needs: build-release
+  publish-to-cargo:
+    name: Publishing to Cargo
     runs-on: ubuntu-latest
     steps:
-      - uses: mislav/bump-homebrew-formula-action@v2
-        if: "!contains(github.ref, '-')" # skip prereleases
-        with:
-          formula-name: gpterm
-          formula-path: Formula/gpterm.rb
-          homebrew-tap: frikksol/frikksol
-          base-branch: main
-          download-url: https://github.com/frikksol/gpterm/releases/download/${{ github.ref_name }}/gpterm_${{ github.ref_name }}_x86_64-apple-darwin.tar.gz
-          commit-message: |
-            {{formulaName}} {{version}}
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo publish --token ${{ secrets.CARGO_API_KEY }} --allow-dirty
 
-            Created by https://github.com/mislav/bump-homebrew-formula-action
-        env:
-          COMMITTER_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
+  bump-homebrew-formula:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Bump Homebrew formulae
+        uses: dawidd6/action-homebrew-bump-formula@v3
+        with:
+          formula: frikksol/frikksol/gpterm
+          token: ${{ secrets.PUBLISHER_TOKEN }}
