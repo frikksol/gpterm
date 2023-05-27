@@ -15,4 +15,6 @@ if [[ `git status --porcelain` ]]; then
     exit 1;
 fi
 
+git pull
 cargo v $VERSION
+git push && git push --tags
