@@ -1,6 +1,6 @@
 # gpterm
 
-This is a simple tool for accessing chat-GPT directly from your terminal.
+This is a simple tool for accessing chat-GPT directly from the comfort of your terminal.
 
 The first time you run the application it will guide you on how to add an API key from chat-GPT.
 
@@ -34,16 +34,18 @@ gpterm -c
 
 Currently the only way to install it is by installing with Cargo or building from source. I am hoping to soon add it to package managers.
 
+### Homebrew Tap (MacOS)
+
+```bash
+brew tap frikksol/frikksol
+brew install gpterm
+```
+
 ### From Cargo
 
 ```bash
 cargo install gpterm
 
-# Single prompt mode
-gpterm "What is a 25 celsius in kelvin?"
-
-# Conversation mode
-gpterm -c
 ```
 
 ### Building from source
@@ -52,10 +54,4 @@ gpterm -c
 cd <wherever>
 git clone git@github.com:frikksol/gpterm.git
 cd gpterm
-
-# Single prompt mode
-cargo run -- "What is 25 Celsius in Kelvin"
-
-# Conversation mode
-cargo run -- -c
 ```
