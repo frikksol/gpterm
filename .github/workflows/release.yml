@@ -45,5 +45,6 @@ jobs:
       - name: Bump Homebrew formulae
         uses: dawidd6/action-homebrew-bump-formula@v3
         with:
-          formula: frikksol/frikksol/gpterm
+          tap: frikksol/frikksol
+          formula: gpterm
           token: ${{ secrets.PUBLISHER_TOKEN }}
