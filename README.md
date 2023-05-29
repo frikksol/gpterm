@@ -45,7 +45,6 @@ brew install gpterm
 
 ```bash
 cargo install gpterm
-
 ```
 
 ### Building from source
@@ -54,4 +53,5 @@ cargo install gpterm
 cd <wherever>
 git clone git@github.com:frikksol/gpterm.git
 cd gpterm
+cargo run -- "What is 25 Celsius in Kelvin"
 ```
