@@ -2,6 +2,7 @@ use std::io;
 
 use chatgpt::prelude::*;
 use loading::Loading;
+use termimad::MadSkin;
 
 pub async fn single_prompt(prompt: String, api_key: String) -> Result<()> {
     print_single_start(prompt.clone());
@@ -81,5 +82,6 @@ fn print_conversation_exit() {
 }
 
 fn print_answer(answer: String) {
-    println!("{}", answer);
+    let skin = MadSkin::default();
+    skin.print_text(answer.as_str());
 }
