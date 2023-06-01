@@ -10,5 +10,9 @@ pub struct AppArgs {
 
     /// Enable to start a conversation instead of a single prompt
     #[arg(short, long, default_value_t = false)]
-    pub conversation: bool
+    pub conversation: bool,
+
+    /// Delete your config
+    #[arg(short, long, default_value_t = false)]
+    pub delete_config: bool
 }
