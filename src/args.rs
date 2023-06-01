@@ -8,7 +8,7 @@ pub struct AppArgs {
     #[arg(default_value_t = String::from(""))]
     pub prompt: String,
 
-    /// Enable to start a conversation instead of a single prompt
+    /// Start a conversation with chat-GPT
     #[arg(short, long, default_value_t = false)]
     pub conversation: bool,
 
